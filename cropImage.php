@@ -10,7 +10,7 @@
      * @param string $bg_color Any color format acceptable to @see \Intervention\Image\Image::fill();
      * @return \Intervention\Image\Image
      */
-    function cropImage(Image $image,$width,$height,$x=null,$y=null,$bg_color='#cccccc'){
+    function cropImage(Image $image,$width,$height,$x=null,$y=null,$bg_color=null){
 
         // What is the size of the image to crop
         $image_width=$image->width();
@@ -25,7 +25,10 @@
             $canvas_height=abs($y)+ $height;
 
             // Create a background image with  background color ;
-            $background = \Intervention\Image\Image::canvas($canvas_width, $canvas_height)->fill($bg_color);
+            $background = \Intervention\Image\Image::canvas($canvas_width, $canvas_height);
+            if ($bg_color) {
+                $background->fill($bg_color);
+            }
             
 
             // Determine the insert position of the image to crop inside the background image
